@@ -62,9 +62,16 @@ public class MainManager : MonoBehaviour
         }
     }
 
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+        GameManager.Instance.WriteSaveData();
+    }
+
     void AddPoint(int point)
     {
         m_Points += point;
+        GameManager.Instance.UpdateCurrentScore(m_Points);
         ScoreText.text = $"Score : {m_Points}";
     }
 
@@ -72,5 +79,6 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        GameManager.Instance.WriteSaveData();
     }
 }
